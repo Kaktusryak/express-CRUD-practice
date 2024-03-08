@@ -2,18 +2,23 @@ const express = require('express')
 const app = express();
 const morgan = require('morgan')//logging 
 const bodyParser = require('body-parser')//to parse body
+const mongoose = require('mongoose')
 
 const productRoutes = require('./api/routes/products')//importing routes
 const orderRoutes = require('./api/routes/orders')
 
+mongoose.connect('mongodb+srv://denis1243qwerty:'+process.env.MONGO_ENV_PW+'@cluster0.vkhvsyb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')//connecting to database
+
+
 app.use(morgan('dev'))//dev - format of usage
+app.use('/uploads',express.static('uploads'))//making folder publicly available and making it use uploads route
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 
 app.use('/products', productRoutes)//routes that handle requests
 app.use('/orders', orderRoutes)
 
-app.use((req,res,next)=>{
+app.use((req,res,next)=>{//headers
     res.header('Access-Control-Allow-Origin','*')
     res.header('Access-Control-Allow-Headers',"Origin, X-Requested-With, Content-Type, Accept, Authorization")
     if(req.method === 'OPTIONS'){
