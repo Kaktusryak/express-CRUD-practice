@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 
 const productRoutes = require('./api/routes/products')//importing routes
 const orderRoutes = require('./api/routes/orders')
+const userRoutes = require('./api/routes/user')
 
 mongoose.connect('mongodb+srv://denis1243qwerty:'+process.env.MONGO_ENV_PW+'@cluster0.vkhvsyb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')//connecting to database
 
@@ -17,6 +18,7 @@ app.use(bodyParser.json())
 
 app.use('/products', productRoutes)//routes that handle requests
 app.use('/orders', orderRoutes)
+app.use('/user', userRoutes)
 
 app.use((req,res,next)=>{//headers
     res.header('Access-Control-Allow-Origin','*')

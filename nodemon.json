@@ -1,5 +1,6 @@
 {
     "env":{
-        "MONGO_ENV_PW":"22112001Denis"
+        "MONGO_ENV_PW":"22112001Denis",
+        "JWT_KEY":"hello"
     }
 }
